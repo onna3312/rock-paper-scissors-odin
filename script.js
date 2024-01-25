@@ -59,7 +59,7 @@ function game() {
   let playerScore = 0;
   let computerScore = 0;
   let currentRound;
-  while ((playerScore || computerScore) < 3) {
+  while ((playerScore < 3 && computerScore < 3)) {
     currentRound = playRound(prompt("Input Your Choice"), getComputerChoice());
     switch (currentRound) {
         case "win":
@@ -74,7 +74,13 @@ function game() {
           break;
       }
       console.log(`Player Score = ${playerScore}, Computer Score = ${computerScore}`);
+    if (playerScore === 3) {
+        return `Player won with the score of ${playerScore} - ${computerScore}`;
+    }
+    else if (computerScore === 3) {
+        return `Computer won with the score of ${computerScore} - ${playerScore}`;
+    }
   }
 }
 
-game();
+console.log(game());
