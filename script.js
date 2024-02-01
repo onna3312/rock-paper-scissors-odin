@@ -83,4 +83,24 @@ function game() {
   }
 }
 
-console.log(game());
+const container = document.querySelector('.buttons-container');
+const buttonRock = document.querySelector('.button-rock');
+const buttonPaper = document.querySelector('.button-paper');
+const buttonScissors = document.querySelector('.button-scissors');
+
+container.addEventListener('click', function () {
+  let target = event.target;
+
+  switch (target.className) {
+    case 'button-rock':
+      console.log('you pick rock');
+      break;
+    case 'button-paper':
+      console.log('you pick paper');
+      break;
+    case 'button-scissors':
+      console.log('you pick scissors');
+      break;
+  }
+  }
+)
