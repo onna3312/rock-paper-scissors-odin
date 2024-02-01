@@ -1,3 +1,15 @@
+const container = document.querySelector('.buttons-container');
+const buttonRock = document.querySelector('.button-rock');
+const buttonPaper = document.querySelector('.button-paper');
+const buttonScissors = document.querySelector('.button-scissors');
+const resultsContainer = document.querySelector('.results-container'); 
+let scorePlayer = 0;
+let scoreComputer = 0;
+
+function addScoreToHTML () {
+  resultsContainer.innerHTML += ` Your score: ${scorePlayer} Computer score: ${scoreComputer}`
+}
+
 function capitalize(inputString) {
   let capitalized = inputString.charAt(0).toUpperCase();
   let lowercased = inputString.slice(1, inputString.length).toLowerCase();
@@ -21,7 +33,7 @@ function getComputerChoice() {
   return computerChoice;
 }
 
-let computerChoice = getComputerChoice();
+
 
 function playRound(playerChoice, computerChoice) {
   if (playerChoice !== null) {
@@ -33,22 +45,25 @@ function playRound(playerChoice, computerChoice) {
   console.log(playerChoice);
   console.log(computerChoice);
   if (playerChoice === computerChoice) {
-    console.log("Tie!");
+    resultsContainer.innerHTML += ' Tie!';
     return "tie";
   } else if (
     (playerChoice == "Rock" && computerChoice == "Scissors") ||
     (playerChoice == "Paper" && computerChoice == "Rock") ||
     (playerChoice == "Scissors" && computerChoice == "Paper")
   ) {
-    console.log(`You win! ${playerChoice} beats ${computerChoice}!`);
+    resultsContainer.innerHTML += ` You win! ${playerChoice} beats ${computerChoice}!`;
+    scorePlayer += 1;
     return "win";
   } else if (
     (computerChoice == "Rock" && playerChoice == "Scissors") ||
     (computerChoice == "Paper" && playerChoice == "Rock") ||
     (computerChoice == "Scissors" && playerChoice == "Paper")
   ) {
-    console.log(`You lose! ${computerChoice} beats ${playerChoice}!`);
+    resultsContainer.innerHTML += ` You lose! ${computerChoice} beats ${playerChoice}!`;
+    scoreComputer += 1;
     return "lose";
+    
   } else {
     console.log(`Incorrect figure.`);
     return "incorrect figure";
@@ -83,23 +98,29 @@ function game() {
   }
 }
 
-const container = document.querySelector('.buttons-container');
-const buttonRock = document.querySelector('.button-rock');
-const buttonPaper = document.querySelector('.button-paper');
-const buttonScissors = document.querySelector('.button-scissors');
+
 
 container.addEventListener('click', function () {
   let target = event.target;
 
   switch (target.className) {
     case 'button-rock':
-      console.log('you pick rock');
+      resultsContainer.textContent = '';
+      resultsContainer.textContent = 'You pick Rock!';
+      playRound('rock', getComputerChoice());
+      addScoreToHTML();
       break;
     case 'button-paper':
-      console.log('you pick paper');
+      resultsContainer.textContent = '';
+      resultsContainer.textContent = 'You pick Paper!';
+      playRound('paper', getComputerChoice());
+      addScoreToHTML();
       break;
     case 'button-scissors':
-      console.log('you pick scissors');
+      resultsContainer.textContent = '';
+      resultsContainer.textContent = 'You pick Scissors!';
+      playRound('scissors', getComputerChoice());
+      addScoreToHTML();
       break;
   }
   }
